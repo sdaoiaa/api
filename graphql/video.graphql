@@ -1,0 +1,23 @@
+type Video {
+	id: ID!
+	title: String!
+	creationDate: String!
+	sinopsis: String!
+	duration: Int!
+	file: String!
+	tipo: String!
+	episode: Int!
+	season: Int!
+	imageFilm: String!
+}
+
+extend type Query {
+	allVideos: [Video!]! @all
+	tipoVideo(tipo: String! @scope(name: "byTipo")) : [Video!] @all
+	videoByGenere: [Video!] @all @scope(name: "joinGenere")
+}
+
+extend type Mutation {
+	modifyVideo(id: ID! @eq, title: String, sinopsis: String, duration: Int): 
+		Video @update
+}
